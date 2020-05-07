@@ -1,0 +1,11 @@
+Serbia;Belgrade=1200000;
+USA;Chicago=2695000;
+Germany;berlin=3562000;
+USA;seattle=608660;
+russia;Moscow=11530222;
+France;Lyon=2100293;
+france;paris=1059b000;
+Spain;MADRID=6002000;
+Croatia;zagr/nb=800321;
+usa;MIAMI=5000502;
+GerMany;Frankfurt=2200345;
