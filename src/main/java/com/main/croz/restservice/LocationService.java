@@ -44,7 +44,7 @@ public class LocationService {
                 result.append("{").append(data).append("VALID").append("}").append("\n");
             } else {
                 //Same but with the INVALID string
-                result.append(data).append("INVALID").append("\n");
+                result.append("{").append(data).append("INVALID").append("}").append("\n");
             }
         }
 

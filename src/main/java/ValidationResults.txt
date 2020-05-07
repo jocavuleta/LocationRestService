@@ -4,7 +4,7 @@
 {USA;seattle=608660;VALID}
 {russia;Moscow=11530222;VALID}
 {France;Lyon=2100293;VALID}
-france;paris=1059b000;INVALID
+{france;paris=1059b000;INVALID}
 {Spain;MADRID=6002000;VALID}
 {Croatia;zagr/nb=800321;VALID}
 {usa;MIAMI=5000502;VALID}
