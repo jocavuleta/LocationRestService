@@ -1,0 +1,11 @@
+{Serbia;Belgrade=1200000;VALID}
+{USA;Chicago=2695000;VALID}
+{Germany;berlin=3562000;VALID}
+{USA;seattle=608660;VALID}
+{russia;Moscow=11530222;VALID}
+{France;Lyon=2100293;VALID}
+{france;paris=1059b000;INVALID}
+{Spain;MADRID=6002000;VALID}
+{Croatia;zagr/nb=800321;VALID}
+{usa;MIAMI=5000502;VALID}
+{GerMany;Frankfurt=2200345;VALID}
