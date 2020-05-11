@@ -13,10 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 @Service
 public class LocationService {
@@ -79,10 +76,15 @@ public class LocationService {
     }
 
     //Sorts just the locations which are VALID based on the criteria
-    public List<Location> listOfValidLocations(File validationResults) throws FileNotFoundException {
+    public List<List<Location>> listOfValidLocations(File validationResults) throws FileNotFoundException {
+
         Scanner myReader = new Scanner(validationResults);
+
         //Resulting list of all locations
-        List<Location> listOfLocations = new ArrayList<>();
+        List<List<Location>> listOfLocations = new ArrayList<>();
+
+        //Using for mapping the cities to the corresponding states
+        HashMap<String, List<String>> map = new HashMap<>();
 
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
@@ -90,7 +92,7 @@ public class LocationService {
             List<String> words = Arrays.asList(data.split(";"));
 
             //Creating references just for clarification
-            String state = words.get(1);
+            String state = words.get(0).substring(1);
             String city = words.get(1).substring(0, words.get(1).indexOf("="));
             String population = words.get(1).substring(words.get(1).indexOf("=") + 1);
             String isValid = words.get(2).substring(0, words.get(2).length() - 1);
@@ -101,11 +103,46 @@ public class LocationService {
             //If a line has VALID string at the end then add it to the
             //resulting list of Locations which we will present in our JSON
             if(isValid.equalsIgnoreCase("VALID")){
-                listOfLocations.add(new Location(state, city, population));
+                List<String> list = new ArrayList<>();
+
+                //Mapping all the cities to the corresponding state
+                if(map.containsKey(state.toUpperCase())){
+                    list = map.get(state.toUpperCase());
+                }
+                list.add(city + ":" + population);
+                map.put(state.toUpperCase(), list);
             }
         }
         //Close the reader
         myReader.close();
+
+
+        //Iterating over each key and value pair in a HashMap
+        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+
+            //Extracting the state
+            String key = entry.getKey();
+
+            //Extracting the list of cities for that state
+            List<String> value = entry.getValue();
+
+            //Creating state instance
+            Location state = new Location(key);
+
+            //Creating country and population instance
+            List<Location> temp = new ArrayList<>();
+
+            //Adding first the state to the list
+            temp.add(state);
+
+            //Creating instances of countries and population and populating the location list
+            for (String s : value) {
+                temp.add(new Location(s.substring(0, s.indexOf(":")), s.substring(s.indexOf(":") + 1)));
+            }
+
+            //Adding the location list to the resulting List<List<Location>>
+            listOfLocations.add(temp);
+        }
 
         //Returning the list of just VALID locations
         return listOfLocations;

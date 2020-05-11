@@ -34,6 +34,15 @@ public class ValidationImpl implements Validation{
 
     @Override
     public boolean isASCII(String line) {
-        return StandardCharsets.US_ASCII.newEncoder().canEncode(line);
+        boolean isASCII = true;
+        for (int i = 0; i < line.length(); i++) {
+            int c = line.charAt(i);
+            if (c > 0x7F) {
+                isASCII = false;
+                break;
+            }
+        }
+        return isASCII;
     }
+
 }

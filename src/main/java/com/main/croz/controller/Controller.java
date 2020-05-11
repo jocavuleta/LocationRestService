@@ -19,14 +19,14 @@ public class Controller {
     private LocationService locationService;
 
     @GetMapping("/locations")
-    public List<Location> locations(@RequestParam(value = "isRegexValidation", defaultValue = "nonregex") String isRegexValidation) throws IOException {
+    public List<List<Location>> locations(@RequestParam(value = "isRegexValidation", defaultValue = "nonregex") String isRegexValidation) throws IOException {
 
         System.out.println(isRegexValidation);
         //Getting the validationResult output txt file
         File validationsResults = locationService.readAndValidateFile("src/main/java/fileToRead.txt", isRegexValidation);
 
         //Extracting the list of all VALID locations from the validationResult txt file
-        List<Location> validLocations = locationService.listOfValidLocations(validationsResults);
+        List<List<Location>> validLocations = locationService.listOfValidLocations(validationsResults);
 
         //returning the list
         return validLocations;

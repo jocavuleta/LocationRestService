@@ -1,10 +1,15 @@
 package com.main.croz.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class Location {
 
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String state;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String capital;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String population;
 
     public Location() {
@@ -14,6 +19,15 @@ public class Location {
         this.state = state;
         this.capital = capital;
         this.population = population;
+    }
+
+    public Location(String capital, String population) {
+        this.capital = capital;
+        this.population = population;
+    }
+
+    public Location(String state) {
+        this.state = state;
     }
 
     public String getState() {
