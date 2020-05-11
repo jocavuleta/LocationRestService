@@ -25,7 +25,6 @@ public class ValidationRegexImpl implements Validation{
     @Override
     public boolean isASCII(String line) {
         if(line.matches("\\A\\p{ASCII}*\\z")){
-            System.out.println("Uso u regex true");
             return true;
         }
         return false;
